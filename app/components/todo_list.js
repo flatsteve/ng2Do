@@ -44,4 +44,3 @@ System.register(['angular2/core', './todo_item', './todo_service'], function(exp
         }
     }
 });
-//# sourceMappingURL=todo_list.js.map

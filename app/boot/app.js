@@ -45,4 +45,3 @@ System.register(['angular2/platform/browser', 'angular2/core', '../components/to
         }
     }
 });
-//# sourceMappingURL=app.js.map

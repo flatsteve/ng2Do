@@ -27,7 +27,7 @@ System.register(['angular2/core', 'angular2/common', './todo_service'], function
                     this.todoService = todoService;
                     this.todoForm = formBuilder.group({
                         'title': ['', common_1.Validators.required],
-                        'description': ['']
+                        'description': ['', common_1.Validators.required]
                     });
                 }
                 AddTodo.prototype.onSubmit = function (todo) {
@@ -47,4 +47,3 @@ System.register(['angular2/core', 'angular2/common', './todo_service'], function
         }
     }
 });
-//# sourceMappingURL=add_todo.js.map

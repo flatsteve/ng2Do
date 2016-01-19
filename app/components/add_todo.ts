@@ -31,7 +31,7 @@ export class AddTodo {
   constructor(public todoService: TodoService, formBuilder: FormBuilder) {
     this.todoForm = formBuilder.group({
       'title': ['', Validators.required],
-      'description': ['']
+      'description': ['', Validators.required]
     });
   }
 
