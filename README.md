@@ -1,3 +1,3 @@
 # ng2Do
 
-Simple todo application written in Angular 2 
+Simple todo application in Angular 2 
