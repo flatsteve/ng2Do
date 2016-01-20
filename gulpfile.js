@@ -3,7 +3,6 @@ var ts = require('gulp-typescript');
 var livereload = require('gulp-livereload');
 var webserver = require('gulp-webserver');
 var rimraf = require('gulp-rimraf');
-var TestServer = require('karma').Server;
 
 var tsProject = ts.createProject('tsconfig.json');
 var config = {
@@ -29,13 +28,6 @@ gulp.task('tsc', function() {
   var tsResult = tsProject.src()
     .pipe(ts(tsProject));
   return tsResult.js.pipe(gulp.dest('.')).pipe(livereload());
-});
-
-gulp.task('test', function (done) {
-  new TestServer({
-    configFile: __dirname + '/karma.conf.js',
-    singleRun: true
-  }, done).start();
 });
 
 gulp.task('default', ['serve'], function () {
