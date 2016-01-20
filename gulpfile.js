@@ -14,6 +14,12 @@ gulp.task('clean', function() {
   .pipe(rimraf());
 });
 
+gulp.task('tsc', function() {
+  var tsResult = tsProject.src()
+    .pipe(ts(tsProject));
+  return tsResult.js.pipe(gulp.dest('.')).pipe(livereload());
+});
+
 gulp.task('serve', function() {
   gulp.src('./')
     .pipe(webserver({
@@ -24,13 +30,7 @@ gulp.task('serve', function() {
     }));
 });
 
-gulp.task('tsc', function() {
-  var tsResult = tsProject.src()
-    .pipe(ts(tsProject));
-  return tsResult.js.pipe(gulp.dest('.')).pipe(livereload());
-});
-
-gulp.task('default', ['serve'], function () {
+gulp.task('default', ['clean', 'tsc', 'serve'], function () {
   livereload.listen();
   gulp.watch([config.typeScript], ['tsc']);
 });

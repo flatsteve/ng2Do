@@ -6,6 +6,6 @@ export class Todo {
   constructor(todo:Todo) {
     this.title = todo.title;
     this.description = todo.description;
-    this.importance = todo.importance || 1;
+    this.importance = todo.importance;
   }
 }

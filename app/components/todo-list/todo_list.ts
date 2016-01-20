@@ -11,7 +11,7 @@ import { TodoService } from '../todo-service/todo_service'
   directives: [TodoItem],
   inputs: ['todo'],
   template: `
-    <todo-item *ngFor="#todo of todos" [todo]="todo"></todo-item>
+    <todo-item *ngFor="#todo of todos; #i = index" [index]="i" [todo]="todo"></todo-item>
   `
 })
 
