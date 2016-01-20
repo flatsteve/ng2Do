@@ -11,6 +11,12 @@ __karma__.loaded = function() {};
 
 System.config({
   packages: {
+    'rxjs': {
+        defaultJSExtensions: true,
+        paths: {
+            'rxjs/*': 'node_modules/rxjs/*.js'
+        }
+    },
     'base/src/app': {
       defaultExtension: false,
       format: 'register',
@@ -19,7 +25,7 @@ System.config({
             reduce(function createPathRecords(pathsMapping, appPath) {
               // creates local module name mapping to global path with karma's fingerprint in path, e.g.:
               // './hero.service': '/base/src/app/hero.service.js?f4523daf879cfb7310ef6242682ccf10b2041b3e'
-              var moduleName = appPath.replace(/^\/base\/src\/app\//, './').replace(/\.js$/, '');
+              var moduleName = appPath.replace(/^\/app\//, './').replace(/\.js$/, '');
               pathsMapping[moduleName] = appPath + '?' + window.__karma__.files[appPath]
               return pathsMapping;
             }, {})
@@ -28,7 +34,7 @@ System.config({
     }
 });
 
-System.import('angular2/src/core/dom/browser_adapter').then(function(browser_adapter) {
+System.import('angular2/src/platform/browser/browser_adapter').then(function(browser_adapter) {
   browser_adapter.BrowserDomAdapter.makeCurrent();
 }).then(function() {
   return Promise.all(
@@ -55,7 +61,7 @@ function filePath2moduleName(filePath) {
 
 
 function onlyAppFiles(filePath) {
-  return /^\/base\/src\/app\/.*\.js$/.test(filePath)
+  return /^\/app\/.*\.js$/.test(filePath)
 }
 
 

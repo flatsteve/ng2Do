@@ -19,9 +19,9 @@
     "gulp-typescript": "^2.10.0",
     "gulp-webserver": "^0.9.1",
     "jasmine": "2.3.2",
-    "karma": "^0.12.23",
-    "karma-chrome-launcher": "^0.1.4",
-    "karma-cli": "^0.0.4",
+    "karma": "^0.13.19",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-cli": "^0.1.2",
     "karma-jasmine": "^0.3.6",
     "live-server": "^0.9.0",
     "typescript": "^1.7.3"
