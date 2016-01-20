@@ -1,12 +1,12 @@
 import { bootstrap } from 'angular2/platform/browser';
 import { Component } from 'angular2/core';
-import { TodoList } from '../components/todo_list';
-import { AddTodo } from '../components/add_todo';
-import { TodoService } from '../components/todo_service';
+import { TodoList } from '../components/todo-list/todo_list';
+import { AddTodo } from '../components/add-todo/add_todo';
+import { TodoService } from '../components/todo-service/todo_service';
 
 
 @Component({
-  selector: 'flatdo',
+  selector: 'ng2-do',
   directives: [TodoList, AddTodo],
   template: `
     <div class="container">
@@ -16,6 +16,6 @@ import { TodoService } from '../components/todo_service';
   `
 })
 
-class FlatDo {}
+class ng2Do {}
 
-bootstrap(FlatDo, [TodoService]);
+bootstrap(ng2Do, [TodoService]);

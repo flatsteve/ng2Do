@@ -1,7 +1,7 @@
 import { Component } from 'angular2/core';
 import { FORM_DIRECTIVES, FormBuilder, ControlGroup, Validators } from 'angular2/common';
-import { Todo } from './todo_model';
-import { TodoService } from './todo_service';
+import { Todo } from '../todo-model/todo_model';
+import { TodoService } from '../todo-service/todo_service';
 
 @Component({
   selector: 'add-todo',
