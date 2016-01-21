@@ -7,22 +7,26 @@ import { TodoService } from '../todo-service/todo_service';
   host: {
     class: 'list-group-item'
   },
-  inputs: ['todo', 'index'],
+  inputs: ['todos', 'todo', 'index'],
   template: `
     <h3 class="list-group-item-heading">{{todo.title}}</h3>
     <p class="list-group-item-text">{{todo.description}}</p>
-    <i (click)="remove(index)" class="fa fa-times-circle-o"></i>
+    <i (click)="remove(todo._id, index)" class="fa fa-times-circle-o"></i>
   `
 })
 
 export class TodoItem {
+  todos: Todo[];
   todo: Todo;
-  index: number;
 
   constructor(public todoService: TodoService) { }
 
-  remove(index): void {
+  remove(id: string, index): void {
     console.log(index);
-    this.todoService.remove(index);
+    this.todoService.remove(id)
+      .subscribe(
+        this.todos.splice(index, 1),
+        err => console.log(err)
+      );
   }
 }

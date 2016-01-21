@@ -1,19 +1,23 @@
 import { Injectable } from 'angular2/core'
+import {Http, Headers} from 'angular2/http';
 import { Todo } from '../todo-model/todo_model';
+import 'rxjs/add/operator/map';
 
 @Injectable()
-
 export class TodoService {
-  todos = [
-    new Todo({ title: 'todo 1 ', description: 'todo 1', importance: 1 }),
-    new Todo({ title: 'todo 2 ', description: 'todo 2', importance: 1 })
-  ];
+  constructor(public http: Http) {}
 
-  add(todo: Todo): void {
-    this.todos.push(new Todo(todo));
+  getAll() {
+    return this.http.get('http://localhost:3000/todo');
   }
 
-  remove(index): void {
-    this.todos.splice(index, 1);
+  add(todo: Todo) {
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:3000/todo', JSON.stringify(todo), { headers: headers });
+  }
+
+  remove(id: string) {
+    return this.http.delete(`http://localhost:3000/todo/${id}`);
   }
 }

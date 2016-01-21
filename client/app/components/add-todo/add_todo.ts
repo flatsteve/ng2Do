@@ -5,6 +5,7 @@ import { TodoService } from '../todo-service/todo_service';
 
 @Component({
   selector: 'add-todo',
+  inputs: ['todos'],
   directives: [FORM_DIRECTIVES],
   template: `
     <form [ngFormModel]="todoForm" (ngSubmit)="onSubmit(todoForm.value)" class="form-horizontal">
@@ -26,6 +27,7 @@ import { TodoService } from '../todo-service/todo_service';
 })
 
 export class AddTodo {
+  todos: Todo[];
   todoForm: ControlGroup;
 
   constructor(public todoService: TodoService, formBuilder: FormBuilder) {
@@ -36,6 +38,11 @@ export class AddTodo {
   }
 
   onSubmit(todo: Todo): void {
-    this.todoService.add(todo);
+    this.todoService.add(todo).map(res => res.json())
+      .subscribe(
+        // TODO this is weird
+        todo => this.todos.push(todo.ops[0]),
+        err => console.log(err)
+      );
   }
 }
