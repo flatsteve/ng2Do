@@ -1,0 +1,24 @@
+.button {
+  background-color: $pink;
+  border-radius: $border-radius--small;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .2);
+  border: 0;
+  color: #fff;
+  font-size: 100%;
+  min-width: 10rem;
+  padding: 1rem;
+  transition: all .3s ease-in;
+
+  &:hover,
+  &:focus {
+    background-color: darken($pink, 5%);
+    box-shadow: none;
+    outline: none;
+  }
+
+  &:disabled {
+    background-color: darken($blue, 5%);
+    box-shadow: none;
+    color: darken($blue, 15%);
+  }
+}

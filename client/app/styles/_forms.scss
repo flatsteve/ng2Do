@@ -1,0 +1,35 @@
+.input-group {
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.input::placeholder {
+  font-style: italic;
+}
+
+.input {
+  border: 0;
+  font-size: 100%;
+  padding: 1rem;
+  outline: none;
+  transition: all .3s ease-in;
+  width: 100%;
+}
+
+.input--textarea {
+  height: 5rem;
+}
+
+.input--invalid {
+  background-color: $pink;
+
+  &::placeholder {
+    color: $white;
+  }
+}
+
+.input-error {
+  background-color: darken($blue, 5%);
+  color: $white;
+  padding: 1rem;
+}

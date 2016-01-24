@@ -7,13 +7,13 @@ import { AddTodo } from '../add-todo/add_todo';
 @Component({
   selector: 'todo-list',
   host: {
-    class: 'list-group'
+    class: 'todo-list'
   },
   directives: [TodoItem, AddTodo],
   inputs: ['todo'],
   template: `
+    <h1 class="title">There is no try</h1>
     <todo-item *ngFor="#todo of todos; #i = index" [todos]="todos" [todo]="todo" [index]="i"></todo-item>
-    <h1>Add new</h1>
     <add-todo [todos]="todos"></add-todo>
   `
 })

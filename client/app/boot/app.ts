@@ -9,7 +9,7 @@ import { TodoService } from '../components/todo-service/todo_service';
   selector: 'ng2-do',
   directives: [TodoList],
   template: `
-    <div class="container">
+    <div class="container container--center">
       <todo-list></todo-list>
     </div>
   `

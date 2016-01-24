@@ -3,15 +3,29 @@ var ts = require('gulp-typescript');
 var livereload = require('gulp-livereload');
 var webserver = require('gulp-webserver');
 var rimraf = require('gulp-rimraf');
+var autoprefixer = require('gulp-autoprefixer');
+var sass = require('gulp-sass');
 
 var tsProject = ts.createProject('tsconfig.json');
 var config = {
+  sass: 'app/**/*.scss',
   typeScript: 'app/**/*.ts'
 };
 
 gulp.task('clean', function() {
   return gulp.src(['app/**/*.js', 'app/**/*.js.map'], { read: false })
   .pipe(rimraf());
+});
+
+gulp.task('sass', function() {
+  return gulp.src(config.sass, {base: "./"})
+    .pipe(sass({
+      errLogToConsole: true,
+      outputStyle: 'compressed'
+    }))
+    .pipe(autoprefixer({ cascade: false }))
+    .pipe(gulp.dest('./'))
+    .pipe(livereload());
 });
 
 gulp.task('tsc', function() {
@@ -30,7 +44,8 @@ gulp.task('serve', function() {
     }));
 });
 
-gulp.task('default', ['clean', 'tsc', 'serve'], function () {
+gulp.task('default', ['clean', 'tsc', 'sass', 'serve'], function () {
   livereload.listen();
   gulp.watch([config.typeScript], ['tsc']);
+  gulp.watch([config.sass], ['sass']);
 });

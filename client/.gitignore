@@ -3,3 +3,4 @@
 /.vscode
 /app/**/*.js
 /app/**/*.js.map
+/styles/styles.css
