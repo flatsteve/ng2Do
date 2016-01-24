@@ -5,9 +5,11 @@ var ObjectId = require('mongodb').ObjectID;
 
 var appRouter = function(app) {
   // Get all todos
-  app.get("/todo", function (req, res) {
+  app.get("/todo", function (req, res, next) {
     db.get().collection('todos').find().toArray(function(err, docs) {
-      if(err) { throw "exception"; }
+      if(err) {
+        return next(res.status(500).send({ message: 'something went wrong!' }));
+      }
 
       res.json(docs);
     });

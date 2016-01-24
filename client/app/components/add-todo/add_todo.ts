@@ -1,7 +1,7 @@
 import { Component, NgIf } from 'angular2/core';
 import { FORM_DIRECTIVES, FormBuilder, ControlGroup, Validators, AbstractControl } from 'angular2/common';
-import { Todo } from '../todo-model/todo_model';
-import { TodoService } from '../todo-service/todo_service';
+import { Todo } from '/app/components/todo-model/todo_model';
+import { TodoService } from '/app/services/todo_service';
 
 @Component({
   selector: 'add-todo',

@@ -1,8 +1,9 @@
 import { Component } from 'angular2/core';
-import { Todo } from '../todo-model/todo_model';
-import { TodoItem } from '../todo-item/todo_item';
-import { TodoService } from '../todo-service/todo_service'
-import { AddTodo } from '../add-todo/add_todo';
+import { Todo } from '/app/components/todo-model/todo_model';
+import { TodoItem } from '/app/components/todo-item/todo_item';
+import { AddTodo } from '/app/components/add-todo/add_todo';
+import { TodoService } from '/app/services/todo_service';
+import { NotificationService } from '/app/services/notification_service';
 
 @Component({
   selector: 'todo-list',
@@ -21,11 +22,11 @@ import { AddTodo } from '../add-todo/add_todo';
 export class TodoList {
   todos: Todo[];
 
-  constructor(todoService: TodoService) {
+  constructor(todoService: TodoService, notificationService: NotificationService) {
     todoService.getAll().map(res => res.json())
       .subscribe(
         todos => this.todos = todos,
-        err => console.log(err)
+        err => notificationService.alert(err.json().message)
       );
   }
 }

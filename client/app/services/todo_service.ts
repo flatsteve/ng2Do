@@ -1,6 +1,6 @@
 import { Injectable } from 'angular2/core'
 import {Http, Headers} from 'angular2/http';
-import { Todo } from '../todo-model/todo_model';
+import { Todo } from '/app/components/todo-model/todo_model';
 import 'rxjs/add/operator/map';
 
 @Injectable()
