@@ -1,5 +1,5 @@
 import { Component } from 'angular2/core';
-import { Todo } from '/app/components/todo-model/todo_model';
+import { Todo } from '/app/models/todo_model';
 import { TodoService } from '/app/services/todo_service';
 
 @Component({

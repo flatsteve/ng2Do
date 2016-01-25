@@ -1,6 +1,7 @@
-import { Component, NgIf } from 'angular2/core';
+import { Component, Query, NgIf, Inject, forwardRef } from 'angular2/core';
 import { FORM_DIRECTIVES, FormBuilder, ControlGroup, Validators, AbstractControl } from 'angular2/common';
-import { Todo } from '/app/components/todo-model/todo_model';
+import { Todo } from '/app/models/todo_model';
+import { TodoList } from '/app/components/todo-list/todo_list';
 import { TodoService } from '/app/services/todo_service';
 
 @Component({
@@ -9,8 +10,13 @@ import { TodoService } from '/app/services/todo_service';
   directives: [FORM_DIRECTIVES],
   template: `
     <form [ngFormModel]="todoForm" (ngSubmit)="onSubmit(todoForm.value)">
-      <div class="input-group add-todo">
-        <input type="text" class="input"
+
+      <div class="input-group">
+        <label class="input-label" for="title">
+          Title
+        </label>
+
+        <input type="text" id="title" class="input"
                [class.input--invalid]="!todoForm.find('title').valid && todoForm.find('title').touched"
                placeholder="e.g. World Takeover"
                [ngFormControl]="todoForm.controls['title']"/>
@@ -20,13 +26,24 @@ import { TodoService } from '/app/services/todo_service';
       </div>
 
       <div class="input-group">
-        <textarea class="input input--textarea" placeholder="e.g. Figure out how to control the world"
+        <label class="input-label" for="description">
+          Description
+        </label>
+
+        <textarea class="input input--textarea" id="description"
+                  placeholder="e.g. Figure out how to control the world"
                   [ngFormControl]="todoForm.controls['description']"></textarea>
       </div>
 
-      <button type="submit" class="button" [disabled]="!todoForm.valid">
-        Add todo
-      </button>
+      <div class="control-group control-group--right">
+        <button type="submit" class="button" [disabled]="!todoForm.valid">
+          Add todo
+        </button>
+
+        <button (click)="toggle()" type="button" class="button button--negative">
+          Cancel
+        </button>
+      </div>
     </form>
   `
 })
@@ -36,13 +53,18 @@ export class AddTodo {
   todoForm: ControlGroup;
   title: AbstractControl;
 
-  constructor(public todoService: TodoService, formBuilder: FormBuilder) {
+  constructor(public todoService: TodoService, formBuilder: FormBuilder, @Inject(forwardRef(() => TodoList)) todoList) {
     this.todoForm = formBuilder.group({
       'title': ['', Validators.required],
       'description': ''
     });
 
     this.title = this.todoForm.controls['title'];
+    this.todoList = todoList;
+  }
+
+  toggle() {
+    this.todoList.toggle();
   }
 
   onSubmit(todo: Todo): void {
@@ -51,7 +73,8 @@ export class AddTodo {
       // TODO this is weird
       (todo) => {
         this.todos.push(todo.ops[0]);
+        this.todoList.toggle();
       },
-      err => console.log(err);
+      err => console.log(err));
   }
 }

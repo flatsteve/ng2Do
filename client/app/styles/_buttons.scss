@@ -1,12 +1,9 @@
-.button {
+@mixin common-button-styles {
   background-color: $pink;
-  border-radius: $border-radius--small;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .2);
   border: 0;
-  color: #fff;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .2);
+  color: $white;
   font-size: 100%;
-  min-width: 10rem;
-  padding: 1rem;
   transition: all .3s ease-in;
 
   &:hover,
@@ -21,4 +18,32 @@
     box-shadow: none;
     color: darken($blue, 15%);
   }
+}
+
+.button {
+  @include common-button-styles;
+
+  border-radius: $border-radius--small;
+  min-width: 10rem;
+  padding: 1rem;
+}
+
+.button--negative {
+  background-color: $orange;
+
+  &:hover,
+  &:focus {
+    background-color:  darken($orange, 15%);;
+  }
+}
+
+.add-button {
+  @include common-button-styles;
+
+  border-radius: 50%;
+  height: 3.5rem;
+  position: absolute;
+  right: -.5rem;
+  top: 0;
+  width: 3.5rem;
 }

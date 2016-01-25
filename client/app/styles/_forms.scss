@@ -3,6 +3,12 @@
   overflow: hidden;
 }
 
+.input-label {
+  color: $white;
+  display: inline-block;
+  margin-bottom: .75rem;
+}
+
 .input::placeholder {
   font-style: italic;
 }
@@ -32,4 +38,14 @@
   background-color: darken($blue, 5%);
   color: $white;
   padding: 1rem;
+}
+
+.control-group {
+  .button {
+    margin-left: .75rem;
+  }
+}
+
+.control-group--right {
+  float: right;
 }
