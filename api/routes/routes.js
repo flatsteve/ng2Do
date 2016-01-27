@@ -1,35 +1,65 @@
-var db = require('../db');
-var ObjectId = require('mongodb').ObjectID;
+var mongoose = require('mongoose');
 
-// TODO figure how to dry up error handling
+var appRouter = function (app) {
 
-var appRouter = function(app) {
+  var todoSchema = mongoose.Schema({
+    title: String,
+    description: String,
+    importance: {
+      type: Number,
+      default: 1
+    },
+    completed: {
+      type: Boolean,
+      default: false
+    }
+  });
+
+  var Todo = mongoose.model('Todo', todoSchema);
+
   // Get all todos
-  app.get("/todo", function (req, res, next) {
-    db.get().collection('todos').find().toArray(function(err, docs) {
-      if(err) {
-        return next(res.status(500).send({ message: 'something went wrong!' }));
+  app.get("/todo", function (req, res) {
+    Todo.find(function (err, todos) {
+      res.json(todos);
+    });
+  });
+
+  // Add new
+  app.post("/todo", function (req, res, next) {
+    var todo = new Todo(req.body);
+
+    todo.save(function (err, todo) {
+      if (err) {
+        return next(err)
       }
 
-      res.json(docs);
+      res.json(201, todo)
     });
   });
 
-  // Post doc
-  app.post("/todo", function (req, res) {
-    db.get().collection('todos').insert(req.body, function(err, doc) {
-      if(err) { throw "exception"; }
+  // Delete existing
+  app.delete("/todo/:todo_id", function (req, res, next) {
+    Todo.findOne({_id: req.params.todo_id}, function (err, model) {
+      if (err) {
+        return next(err);
+      }
 
-      res.json(doc);
+      model.remove(function (err) {
+        res.sendStatus(200);
+      });
     });
   });
 
-  // Delete doc
-  app.delete("/todo/:todo_id", function (req, res) {
-    db.get().collection('todos').remove({ _id: ObjectId(req.params.todo_id) }, function(err, status) {
-      if(err) { throw "exception"; }
+  // Update existing
+  app.put("/todo/:todo_id", function (req, res) {
+    Todo.findOne({_id: req.params.todo_id}, function (err, model) {
+      if (err) {
+        return;
+      }
 
-      res.send(status);
+      model.update({completed: req.body.completed}, function (err, updatedTodo) {
+        res.json(updatedTodo);
+      });
     });
   });
 };

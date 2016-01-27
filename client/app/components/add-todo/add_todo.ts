@@ -6,7 +6,6 @@ import { TodoService } from '/app/services/todo_service';
 
 @Component({
   selector: 'add-todo',
-  inputs: ['todos'],
   directives: [FORM_DIRECTIVES],
   template: `
     <form [ngFormModel]="todoForm" (ngSubmit)="onSubmit(todoForm.value)">
@@ -49,7 +48,6 @@ import { TodoService } from '/app/services/todo_service';
 })
 
 export class AddTodo {
-  todos: Todo[];
   todoForm: ControlGroup;
   title: AbstractControl;
 
@@ -70,10 +68,9 @@ export class AddTodo {
   onSubmit(todo: Todo): void {
     this.todoService.add(todo).map(res => res.json())
       .subscribe(
-      // TODO this is weird
       (todo) => {
-        this.todos.push(todo.ops[0]);
-        this.todoList.toggle();
+        this.todoList.todos.push(todo);
+        this.toggle();
       },
       err => console.log(err));
   }

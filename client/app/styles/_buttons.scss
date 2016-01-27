@@ -41,9 +41,9 @@
   @include common-button-styles;
 
   border-radius: 50%;
+  bottom: 2.5rem;
   height: 3.5rem;
-  position: absolute;
-  right: -.5rem;
-  top: 0;
+  position: fixed;
+  right: 1.5rem;
   width: 3.5rem;
 }

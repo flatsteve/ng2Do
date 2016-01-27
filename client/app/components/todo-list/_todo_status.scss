@@ -1,0 +1,29 @@
+.todo-status {
+  margin: 2rem 0;
+}
+
+.todo-status__list {
+  font-size: 0;
+  padding-left: 0;
+  width: 100%;
+}
+
+.todo-status__list__item {
+  display: inline-block;
+  color: $white;
+  list-style: none;
+  font-size: 16px;
+  opacity: .5;
+  text-align: center;
+  transition: all .3s ease-in;
+  width: 50%;
+
+  &:hover {
+    cursor: pointer;
+    opacity: .8;
+  }
+
+  &.active {
+    opacity: 1;
+  }
+}

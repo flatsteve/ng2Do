@@ -5,10 +5,10 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class TodoService {
-  constructor(public http: Http) {}
+  todos: Todo[];
 
-  getAll() {
-    return this.http.get('http://localhost:3000/todo');
+  constructor(public http: Http) {
+    this.todos = http.get('http://localhost:3000/todo').map(res => res.json());
   }
 
   add(todo: Todo) {
@@ -19,5 +19,11 @@ export class TodoService {
 
   remove(id: string) {
     return this.http.delete(`http://localhost:3000/todo/${id}`);
+  }
+
+  update(todo) {
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.put(`http://localhost:3000/todo/${todo._id}`, JSON.stringify(todo), { headers: headers });
   }
 }
