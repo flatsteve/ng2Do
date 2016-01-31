@@ -19,7 +19,9 @@
     "gulp-livereload": "^3.8.1",
     "gulp-rimraf": "^0.2.0",
     "gulp-sass": "^2.1.1",
+    "gulp-sourcemaps": "^1.6.0",
     "gulp-typescript": "^2.10.0",
-    "gulp-webserver": "^0.9.1"
+    "gulp-webserver": "^0.9.1",
+    "path": "^0.12.7"
   }
 }

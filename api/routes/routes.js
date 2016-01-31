@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-
 var appRouter = function (app) {
 
   var todoSchema = mongoose.Schema({
@@ -44,7 +43,7 @@ var appRouter = function (app) {
         return next(err);
       }
 
-      model.remove(function (err) {
+      model.remove(function () {
         res.sendStatus(200);
       });
     });

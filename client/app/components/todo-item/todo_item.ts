@@ -20,17 +20,18 @@ import { TodoService } from '/app/services/todo_service';
     </div>
 
     <div class="todo-item__actions">
-      <i [hidden]="!todo.completed"
-         (click)="remove(todo._id, index)" class="fa fa-times-circle-o"></i>
+      <label [hidden]="todo.completed" class="input-label--checkbox">
+        <input class="input--checkbox" #cb type="checkbox" (change)="update(todo, cb.checked)"/>
+      </label>
 
-      <input [hidden]="todo.completed" #cb type="checkbox" (change)="update(todo, cb.checked)">
+      <i [hidden]="!todo.completed"
+         (click)="remove(todo._id, index)"
+         class="todo-item__actions--delete fa fa-lg fa-times-circle-o"></i>
     </div>
   `
 })
 
 export class TodoItem {
-  todo: Todo;
-
   constructor(public todoService: TodoService, @Inject(forwardRef(() => TodoList)) todoList) {
     this.todoList = todoList;
   }
@@ -43,7 +44,8 @@ export class TodoItem {
     );
   }
 
-  update(todo, status) {
+  update(todo: Todo, status) {
+    console.log(todo + ' ' + status);
     todo.completed = status;
 
     this.todoService.update(todo)

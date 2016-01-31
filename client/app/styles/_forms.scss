@@ -49,3 +49,24 @@
 .control-group--right {
   float: right;
 }
+
+.input--checkbox {
+  visibility: hidden;
+}
+
+.input-label--checkbox:before {
+  border: 2px solid $blue;
+  content: '';
+  display: inline-block;
+  height: 1rem;
+  padding: .1rem;
+  width: 1rem;
+  vertical-align: middle;
+}
+
+.input-label--checkbox:hover:before {
+  color: darken($white, 10%);
+  content: '\f00c';
+  cursor: pointer;
+  font-family: 'Fontawesome';
+}

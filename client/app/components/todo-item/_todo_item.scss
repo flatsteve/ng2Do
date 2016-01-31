@@ -26,3 +26,13 @@
   text-align: center;
   width: 10%;
 }
+
+.todo-item__actions--delete {
+  color: $blue;
+  transition: all .3s ease-in;
+
+  &:hover {
+    cursor: pointer;
+    color: darken($blue, 15%);
+  }
+}

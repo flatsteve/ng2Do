@@ -1,6 +1,4 @@
 import { Component, NgFor, NgIf } from 'angular2/core';
-//ChangeDetectionStrategy
-
 import { NgClass } from 'angular2/common';
 import { Todo } from '/app/models/todo_model';
 import { TodoItem } from '/app/components/todo-item/todo_item';
@@ -17,7 +15,6 @@ import { TodoPipe } from '/app/pipes/todo_pipe';
   directives: [TodoItem, AddTodo],
   pipes: [TodoPipe],
   inputs: ['todo'],
-  //changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <nav class="todo-status">
       <ul class="todo-status__list" *ngIf="todos.length">

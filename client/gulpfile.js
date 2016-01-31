@@ -5,6 +5,7 @@ var webserver = require('gulp-webserver');
 var rimraf = require('gulp-rimraf');
 var autoprefixer = require('gulp-autoprefixer');
 var sass = require('gulp-sass');
+var sourcemaps = require('gulp-sourcemaps');
 
 var tsProject = ts.createProject('tsconfig.json');
 var config = {
@@ -30,8 +31,13 @@ gulp.task('sass', function() {
 
 gulp.task('tsc', function() {
   var tsResult = tsProject.src()
+    .pipe(sourcemaps.init())
     .pipe(ts(tsProject));
-  return tsResult.js.pipe(gulp.dest('.')).pipe(livereload());
+
+  return tsResult.js
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('.'))
+    .pipe(livereload());
 });
 
 gulp.task('serve', function() {
